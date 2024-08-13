@@ -2,7 +2,6 @@ import 'package:flutify/core/theme/app_theme.dart';
 import 'package:flutify/features/auth/view/pages/signup_page.dart';
 import 'package:flutter/material.dart';
 
-import 'features/auth/view/pages/login_page.dart';
 
 void main() {
   runApp(const MyApp());
