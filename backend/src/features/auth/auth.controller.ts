@@ -10,7 +10,7 @@ export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly bcrypt: BcryptService,
-  ) {}
+  ) { }
 
   @Post('signup')
   @UsePipes(new ZodPipe(SignUpSchema))

@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { BcryptService } from '../../common/bcrypt.service';
 import { UserService } from '../user/user.service';
 import { SignUpDto } from './dto/signup-user.dto';
@@ -10,7 +10,7 @@ export class AuthService {
     private readonly userService: UserService,
     private readonly bcrypt: BcryptService,
     private readonly jwt: JwtService,
-  ) {}
+  ) { }
 
   async signup(signupDto: SignUpDto) {
     signupDto.password = await this.bcrypt.hash(signupDto.password);
@@ -19,7 +19,7 @@ export class AuthService {
     if (!user) {
       return this.userService.create(signupDto);
     }
-    throw new NotFoundException('User already exists');
+    throw new ConflictException('User already exists');
   }
 
   async login(loginDto: any) {
@@ -39,5 +39,6 @@ export class AuthService {
         accessToken: accessToken,
       };
     }
+    throw new UnauthorizedException("Either email or password incorrect")
   }
 }

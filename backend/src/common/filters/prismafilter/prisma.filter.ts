@@ -1,14 +1,10 @@
 import {
   ArgumentsHost,
   Catch,
-  ConflictException,
-  ExceptionFilter,
   HttpStatus,
-  NotFoundException,
 } from '@nestjs/common';
 import { BaseExceptionFilter } from '@nestjs/core';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
-import { STATUS_CODES } from 'http';
 
 @Catch(PrismaClientKnownRequestError)
 export class PrismaFilter<

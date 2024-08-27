@@ -14,9 +14,18 @@ class CustomFiled extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      decoration: InputDecoration(hintText: hintText),
+      decoration: InputDecoration(
+        hintText: hintText,
+      ),
+      style: Theme.of(context).textTheme.titleSmall,
       obscureText: isObscured,
       controller: controller,
+      validator: (value) {
+        if (value!.trim().isNotEmpty) {
+          return null;
+        }
+        return "All fields must be filled";
+      },
     );
   }
 }

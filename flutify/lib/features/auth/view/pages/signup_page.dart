@@ -1,4 +1,5 @@
 import 'package:flutify/core/theme/app_pallete.dart';
+import 'package:flutify/features/auth/repository/auth_remote_repository.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/widgets/custom_field.dart';
@@ -11,15 +12,16 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignpuPageState extends State<SignupPage> {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _nameController.dispose();
     super.dispose();
   }
 
@@ -28,6 +30,7 @@ class _SignpuPageState extends State<SignupPage> {
     return Scaffold(
         appBar: AppBar(),
         body: Form(
+          key: _formKey,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -44,21 +47,21 @@ class _SignpuPageState extends State<SignupPage> {
                 CustomFiled(
                     hintText: "Name",
                     isObscured: false,
-                    controller: nameController),
+                    controller: _nameController),
                 const SizedBox(
                   height: 10,
                 ),
                 CustomFiled(
                     hintText: "Email",
                     isObscured: false,
-                    controller: emailController),
+                    controller: _emailController),
                 const SizedBox(
                   height: 10,
                 ),
                 CustomFiled(
                     hintText: "Password",
                     isObscured: true,
-                    controller: passwordController),
+                    controller: _passwordController),
                 const SizedBox(
                   height: 10,
                 ),
@@ -77,7 +80,14 @@ class _SignpuPageState extends State<SignupPage> {
                     ),
                   ),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        AuthRemoteRepository().signupUser(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                            name: _nameController.text);
+                      }
+                    },
                     style: TextButton.styleFrom(
                       backgroundColor: Pallete.transparentColor,
                       foregroundColor: Pallete.whiteColor,

@@ -10,10 +10,9 @@ export class ZodFilter<ZodError> implements ExceptionFilter {
       const err = exception.issues.map((issue) => {
         return { path: issue.path[0], message: issue.message };
       });
-      response.status(400).json({
-        statusCode: 400,
+      response.status(422).json({
         message: 'Bad Request',
-        errors: err,
+        detail: err,
       });
     }
   }

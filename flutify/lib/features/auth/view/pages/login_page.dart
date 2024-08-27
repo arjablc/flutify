@@ -1,4 +1,5 @@
 import 'package:flutify/core/theme/app_pallete.dart';
+import 'package:flutify/features/auth/repository/auth_remote_repository.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/widgets/custom_field.dart';
@@ -11,13 +12,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -26,6 +28,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
         appBar: AppBar(),
         body: Form(
+          key: _formKey,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -42,14 +45,14 @@ class _LoginPageState extends State<LoginPage> {
                 CustomFiled(
                     hintText: "Email",
                     isObscured: false,
-                    controller: emailController),
+                    controller: _emailController),
                 const SizedBox(
                   height: 10,
                 ),
                 CustomFiled(
                     hintText: "Password",
                     isObscured: true,
-                    controller: passwordController),
+                    controller: _passwordController),
                 const SizedBox(
                   height: 10,
                 ),
@@ -68,7 +71,14 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        AuthRemoteRepository().loginUser(
+                            email: _emailController.text,
+                            password: _passwordController.text);
+                      }
+                      ;
+                    },
                     style: TextButton.styleFrom(
                       backgroundColor: Pallete.transparentColor,
                       foregroundColor: Pallete.whiteColor,
