@@ -5,7 +5,6 @@ import '../failure/failure.dart';
 class ExceptionHelper {
   static AppFailure dioExceptionToFailure(DioException exception) {
     late String message;
-    List<Map<String, dynamic>>? detail;
     StackTrace? trace;
 
     switch (exception.type) {
@@ -24,12 +23,11 @@ class ExceptionHelper {
       case DioExceptionType.badResponse:
         final formattedResponse = exception.response!.data;
         message = formattedResponse['message'];
-        detail = List<Map<String, dynamic>>.from(formattedResponse['detail']);
 
       default:
         message = "Something went horribly worng";
     }
 
-    return AppFailure(message: message, detail: detail, trace: trace);
+    return AppFailure(message: message, trace: trace);
   }
 }

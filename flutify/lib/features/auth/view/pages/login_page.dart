@@ -1,6 +1,7 @@
 import 'package:flutify/core/theme/app_pallete.dart';
 import 'package:flutify/features/auth/repository/auth_remote_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/widgets/custom_field.dart';
 
@@ -96,21 +97,16 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(
                   height: 10,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Don\'t have an account?',
-                        style: Theme.of(context).textTheme.titleSmall),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        padding: const EdgeInsets.all(0),
-                      ),
-                      onPressed: () {},
-                      child: const Text(
-                        'Sign Up',
-                      ),
-                    ),
-                  ],
+                GestureDetector(
+                  onTap: () => context.go('/signup'),
+                  child: RichText(
+                      text: const TextSpan(
+                          text: "Don't have an account? ",
+                          children: [
+                        TextSpan(
+                            text: "Create one.",
+                            style: TextStyle(fontWeight: FontWeight.bold))
+                      ])),
                 ),
               ],
             ),

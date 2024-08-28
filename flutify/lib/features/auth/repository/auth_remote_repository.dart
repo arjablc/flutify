@@ -20,14 +20,13 @@ class AuthRemoteRepository {
       final response = await client.post(
           AppConstants.baseUrlDev + AppConstants.loginRoute,
           data: payload);
-      debugPrint(response.toString());
-      return Right(UserModel.fromRawJson(jsonDecode(response.toString())));
+      return Right(UserModel.fromRawJson(jsonDecode(response.data)));
     } on DioException catch (error) {
-      debugPrint(error.toString());
-      return Left(ExceptionHelper.dioExceptionToFailure(error));
+      debugPrint(error.type.toString());
+      final failure = ExceptionHelper.dioExceptionToFailure(error);
+      return Left(failure);
     } catch (error) {
-      debugPrint(error.toString());
-      return Left(AppFailure(message: "An Unknown error occured"));
+      return const Left(AppFailure(message: "An Unknown error occured"));
     }
   }
 
@@ -42,14 +41,13 @@ class AuthRemoteRepository {
           AppConstants.baseUrlDev + AppConstants.signupRoute,
           data: payload);
       debugPrint(response.toString());
-      return Right(UserModel.fromRawJson(jsonDecode(response.toString())));
+      return Right(UserModel.fromJson(response.data));
     } on DioException catch (error) {
-      debugPrint(error as String?);
-
-      return Left(ExceptionHelper.dioExceptionToFailure(error));
+      final failure = ExceptionHelper.dioExceptionToFailure(error);
+      debugPrint(failure.toString());
+      return Left(failure);
     } catch (error) {
-      debugPrint(error.toString());
-      return Left(AppFailure(message: "An Unknown error occured"));
+      return const Left(AppFailure(message: "An Unknown error occured"));
     }
   }
 }

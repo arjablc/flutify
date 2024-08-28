@@ -1,9 +1,7 @@
 import "package:dio/dio.dart";
 
-
 class HttpService {
   late Dio _dio;
-  //TODO: to make the connectivityService injected
 
   static final BaseOptions _baseOptions = BaseOptions(
     connectTimeout: const Duration(seconds: 5),
@@ -12,12 +10,8 @@ class HttpService {
     contentType: Headers.jsonContentType,
   );
 
-
-
-  Dio getDio () {
+  Dio getDio() {
     _dio = Dio(_baseOptions);
     return _dio;
   }
-
-
 }

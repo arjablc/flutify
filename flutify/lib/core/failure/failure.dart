@@ -1,7 +1,17 @@
-class AppFailure {
+import 'package:equatable/equatable.dart';
+
+class AppFailure extends Equatable {
   final String message;
-  final List<Map<String, dynamic>>? detail;
   final StackTrace? trace;
 
-  AppFailure({required this.message, this.detail, this.trace});
+  const AppFailure({required this.message, this.trace});
+
+  @override
+  List<Object?> get props => [
+        message,
+      ];
+  @override
+  String toString() {
+    return "message: $message ";
+  }
 }

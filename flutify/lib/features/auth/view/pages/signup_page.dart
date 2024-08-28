@@ -1,6 +1,7 @@
 import 'package:flutify/core/theme/app_pallete.dart';
 import 'package:flutify/features/auth/repository/auth_remote_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/widgets/custom_field.dart';
 
@@ -105,21 +106,17 @@ class _SignpuPageState extends State<SignupPage> {
                 const SizedBox(
                   height: 10,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Already have an account?',
-                        style: Theme.of(context).textTheme.titleSmall),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        padding: const EdgeInsets.all(0),
-                      ),
-                      onPressed: () {},
-                      child: const Text(
-                        'Log In.',
-                      ),
-                    ),
-                  ],
+                GestureDetector(
+                  onTap: () => context.go('/login'),
+                  child: RichText(
+                      text: const TextSpan(
+                          text: "Already have an account ? ",
+                          children: [
+                        TextSpan(
+                          text: "Log In.",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )
+                      ])),
                 ),
               ],
             ),
