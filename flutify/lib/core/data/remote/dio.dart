@@ -1,4 +1,12 @@
-import "package:dio/dio.dart";
+import 'package:dio/dio.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'dio.g.dart';
+
+@riverpod
+HttpService httpServce(HttpServceRef ref) {
+  return HttpService();
+}
 
 class HttpService {
   late Dio _dio;

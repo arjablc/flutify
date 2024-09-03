@@ -1,0 +1,13 @@
+{
+    "message": "Validation Error",
+    "detail": [
+        {
+            "path": "email",
+            "message": "must be an email"
+        },
+        {
+            "path": "email",
+            "message": "must be an email"
+        }
+    ]
+}

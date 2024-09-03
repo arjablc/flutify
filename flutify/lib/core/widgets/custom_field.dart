@@ -24,7 +24,7 @@ class CustomFiled extends StatelessWidget {
         if (value!.trim().isNotEmpty) {
           return null;
         }
-        return "All fields must be filled";
+        return 'All fields must be filled';
       },
     );
   }

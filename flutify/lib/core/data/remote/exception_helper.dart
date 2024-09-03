@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' show DioExceptionType, DioException;
 
 import '../failure/failure.dart';
 
@@ -9,25 +9,23 @@ class ExceptionHelper {
 
     switch (exception.type) {
       case DioExceptionType.sendTimeout:
-        message = "Request Send Timeout";
+        message = 'Request Send Timeout';
         break;
       case DioExceptionType.receiveTimeout:
-        message = "Response receive Timeout";
+        message = 'Response receive Timeout';
         break;
       case DioExceptionType.connectionError:
-        message = "Connection Error";
+        message = 'Connection Error';
         break;
       case DioExceptionType.connectionTimeout:
-        message = "Connection Timed out";
+        message = 'Connection Timed out';
         break;
       case DioExceptionType.badResponse:
-        final formattedResponse = exception.response!.data;
-        message = formattedResponse['message'];
-
+        return ServerFailure.fromJson(exception.response!.data);
       default:
-        message = "Something went horribly worng";
+        message = 'Something went horribly worng';
     }
 
-    return AppFailure(message: message, trace: trace);
+    return ServerFailure(message: message, trace: trace);
   }
 }
