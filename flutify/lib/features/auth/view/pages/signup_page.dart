@@ -1,3 +1,6 @@
+import 'package:flutify/core/failure/failure.dart';
+import 'package:flutify/core/utils/snack_bar_util.dart';
+import 'package:flutify/core/widgets/circular_loader.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -30,15 +33,26 @@ class _SignpuPageState extends ConsumerState<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLoading = ref.watch(authViewModelProvider)?.isLoading ?? false;
+    final bool isLoading = ref.watch(authViewModelProvider.select(
+      (value) => value?.isLoading == true,
+    ));
+    ref.listen(authViewModelProvider, (_, next) {
+      next?.when(
+          data: (data) {
+            showInfoSnackbar(
+                infoMessage: 'Account created Successfully1', context: context);
+            context.push('/login');
+          },
+          error: (error, stackTrace) {
+            showErrorSnackbar(
+                failure: error as ServerFailure, context: context);
+          },
+          loading: () {});
+    });
     return Scaffold(
         appBar: AppBar(),
         body: isLoading
-            ? const CircularProgressIndicator(
-                backgroundColor: Colors.white,
-                color: Pallete.gradient1,
-                strokeWidth: 10,
-              )
+            ? const Center(child: CustomLoader())
             : Form(
                 key: _formKey,
                 child: Padding(

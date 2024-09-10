@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart' show DioExceptionType, DioException;
 
-import '../failure/failure.dart';
+import '../../failure/failure.dart';
 
 class ExceptionHelper {
   static AppFailure dioExceptionToFailure(DioException exception) {

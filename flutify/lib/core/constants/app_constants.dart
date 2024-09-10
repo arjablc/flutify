@@ -5,4 +5,5 @@ class AppConstants {
 
   static const loginRoute = 'auth/login';
   static const signupRoute = 'auth/signup';
+  static const aboutMeRoute = 'user/me';
 }

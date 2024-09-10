@@ -31,14 +31,16 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isLoading = ref.watch(authViewModelProvider)?.isLoading == true;
+    final bool isLoading = ref.watch(authViewModelProvider.select(
+      (value) => value?.isLoading == true,
+    ));
     ref.listen(authViewModelProvider, (prev, next) {
       next?.when(
           data: (UserModel data) {
             //TODO: add navigation to home page
             showInfoSnackbar(
-                infoMessage: 'Successfully logged in as ${data.name}',
-                context: context);
+                infoMessage: 'Successfully logged in as ${data.name}', context: context);
+            context.push('/about-me');
           },
           error: (dynamic error, StackTrace stackTrace) {
             if (error.runtimeType == ServerFailure) {
@@ -67,16 +69,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         height: 10,
                       ),
                       CustomFiled(
-                          hintText: 'Email',
-                          isObscured: false,
-                          controller: _emailController),
+                          hintText: 'Email', isObscured: false, controller: _emailController),
                       const SizedBox(
                         height: 10,
                       ),
                       CustomFiled(
-                          hintText: 'Password',
-                          isObscured: true,
-                          controller: _passwordController),
+                          hintText: 'Password', isObscured: true, controller: _passwordController),
                       const SizedBox(
                         height: 10,
                       ),
@@ -97,18 +95,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         child: TextButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              ref
-                                  .read(authViewModelProvider.notifier)
-                                  .loginUser(
-                                      email: _emailController.text,
-                                      password: _passwordController.text);
+                              ref.read(authViewModelProvider.notifier).loginUser(
+                                  email: _emailController.text, password: _passwordController.text);
                             }
                           },
                           style: TextButton.styleFrom(
                             backgroundColor: Pallete.transparentColor,
                             foregroundColor: Pallete.whiteColor,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 50, vertical: 14),
+                            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 14),
                             textStyle: const TextStyle(
                               fontSize: 22,
                             ),
@@ -124,15 +118,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       GestureDetector(
                         onTap: () => context.go('/signup'),
                         child: RichText(
-                            text: const TextSpan(
-                                text: "Don't have an account? ",
-                                children: [
-                              TextSpan(
-                                  text: 'Create one.',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Pallete.gradient2))
-                            ])),
+                            text: const TextSpan(text: "Don't have an account? ", children: [
+                          TextSpan(
+                              text: 'Create one.',
+                              style:
+                                  TextStyle(fontWeight: FontWeight.bold, color: Pallete.gradient2))
+                        ])),
                       ),
                     ],
                   ),

@@ -24,9 +24,9 @@ class ServerFailure extends AppFailure {
 
   // must be already json decoded
   factory ServerFailure.fromJson(Map<String, dynamic> source) {
-    final details = source['detail'] as List<dynamic>;
+    final details = source['detail'] as List<dynamic>?;
     // check for detail and the type of detail
-    if (details.runtimeType == List) {
+    if (details.runtimeType == List && details != null) {
       final listOfDetails = details
           .map(
             (e) => "${e['path']} ${e['message']}",

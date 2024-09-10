@@ -8,6 +8,7 @@ void showErrorSnackbar(
   ScaffoldMessenger.of(context)
     ..hideCurrentSnackBar()
     ..showSnackBar(SnackBar(
+      duration: const Duration(milliseconds: 750),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       content: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -25,5 +26,7 @@ void showInfoSnackbar(
   ScaffoldMessenger.of(context)
     ..hideCurrentSnackBar()
     ..showSnackBar(SnackBar(
-        backgroundColor: Pallete.gradient3, content: Text(infoMessage)));
+        duration: const Duration(milliseconds: 750),
+        backgroundColor: Pallete.greenColor,
+        content: Text(infoMessage)));
 }
