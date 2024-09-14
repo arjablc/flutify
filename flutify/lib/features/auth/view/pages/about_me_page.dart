@@ -17,8 +17,7 @@ class AboutMePage extends ConsumerWidget {
       authViewModelProvider,
       (previous, next) {
         if (next?.hasError ?? false) {
-          showErrorSnackbar(
-              failure: next?.error as ServerFailure, context: context);
+          showErrorSnackbar(failure: next?.error as ServerFailure, context: context);
         }
       },
     );
@@ -36,8 +35,7 @@ class AboutMePage extends ConsumerWidget {
                       state?.hasValue == true
                           ? Text(state!.value.toString(),
                               style: Theme.of(context).textTheme.titleSmall)
-                          : Text('No user data',
-                              style: Theme.of(context).textTheme.titleLarge),
+                          : Text('No user data', style: Theme.of(context).textTheme.titleLarge),
                       TextButton(
                           onPressed: () {
                             ref.read(authTokenRepoProvider).invalidateToken();
@@ -49,7 +47,7 @@ class AboutMePage extends ConsumerWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: ref.read(authViewModelProvider.notifier).getMe,
+        onPressed: ref.read(authViewModelProvider.notifier).getCurrentUser,
         child: const Icon(Icons.arrow_upward),
       ),
     );

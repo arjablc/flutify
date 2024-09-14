@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -21,8 +23,7 @@ class AppFailure {
     }).toList();
     print(listOfDetails);
 
-    return AppFailure(
-        message: source['message'], detail: ['somethign', 'something else']);
+    return AppFailure(message: source['message'], detail: ['somethign', 'something else']);
   }
 }
 

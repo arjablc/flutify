@@ -5,7 +5,7 @@ import { SignUpDto } from '../auth/dto/signup-user.dto';
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   secureSelection = {
     id: true,
@@ -27,7 +27,6 @@ export class UserService {
     return await this.prisma.user.findUnique({ where: { email } });
   }
   async findById(id: string) {
-    console.log(id);
     return this.prisma.user.findUnique({
       where: { id: id },
       select: this.secureSelection,

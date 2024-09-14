@@ -3,6 +3,7 @@ import { BcryptService } from '../../common/bcrypt.service';
 import { UserService } from '../user/user.service';
 import { SignUpDto } from './dto/signup-user.dto';
 import { JwtService } from '@nestjs/jwt';
+import { warn } from 'console';
 
 @Injectable()
 export class AuthService {
@@ -27,6 +28,7 @@ export class AuthService {
     if (!user) {
       throw new NotFoundException('Invalid credentials');
     }
+    const { password, ...secureUser } = user;
     const isPasswordValid = await this.bcrypt.compare(
       loginDto.password,
       user.password,
@@ -37,6 +39,7 @@ export class AuthService {
       return {
         message: 'Logged in',
         accessToken: accessToken,
+        user: secureUser
       };
     }
     throw new UnauthorizedException("Either email or password incorrect")

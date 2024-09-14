@@ -9,12 +9,12 @@ import { AuthController } from './auth.controller';
   imports: [
     UserModule,
     JwtModule.register({
-      secret: process.env.JWT_SECRET,
+      secret: process.env.JWT_SECRET ?? "not to throw",
       global: true,
-      signOptions: { expiresIn: '1d' },
+      signOptions: { expiresIn: '2m' },
     }),
   ],
   controllers: [AuthController],
   providers: [AuthService, BcryptService],
 })
-export class AuthModule {}
+export class AuthModule { }

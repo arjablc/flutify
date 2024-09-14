@@ -40,7 +40,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             //TODO: add navigation to home page
             showInfoSnackbar(
                 infoMessage: 'Successfully logged in as ${data.name}', context: context);
-            context.push('/about-me');
+            context.go('/home');
           },
           error: (dynamic error, StackTrace stackTrace) {
             if (error.runtimeType == ServerFailure) {
@@ -116,7 +116,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         height: 10,
                       ),
                       GestureDetector(
-                        onTap: () => context.go('/signup'),
+                        onTap: () => context.push('/signup'),
                         child: RichText(
                             text: const TextSpan(text: "Don't have an account? ", children: [
                           TextSpan(

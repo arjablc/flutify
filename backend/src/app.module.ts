@@ -7,9 +7,10 @@ import { PrismaModule } from './common/prisma/prisma.module';
 import { PrismaFilter } from './common/filters/prismafilter/prisma.filter';
 import { ZodFilter } from './common/filters/zodfilter/zod.filter';
 import { AuthModule } from './features/auth/auth.module';
+import { HomeModule } from './home/home.module';
 
 @Module({
-  imports: [UserModule, PrismaModule, AuthModule],
+  imports: [UserModule, PrismaModule, AuthModule, HomeModule],
   controllers: [AppController],
   providers: [
     AppService,

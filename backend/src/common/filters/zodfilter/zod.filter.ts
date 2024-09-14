@@ -11,7 +11,7 @@ export class ZodFilter<ZodError> implements ExceptionFilter {
         return { path: issue.path[0], message: issue.message };
       });
       response.status(422).json({
-        message: 'Bad Request',
+        message: 'Validation failed',
         detail: err,
       });
     }
