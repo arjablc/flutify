@@ -46,11 +46,14 @@ class _SignpuPageState extends ConsumerState<SignupPage> {
               if (prev == next) {
                 return;
               }
-              showInfoSnackbar(infoMessage: 'Account created Successfully1', context: context);
+              showInfoSnackbar(
+                  infoMessage: 'Account created Successfully1',
+                  context: context);
               context.push('/login');
             },
             error: (error, stackTrace) {
-              showErrorSnackbar(failure: error as ServerFailure, context: context);
+              showErrorSnackbar(
+                  failure: error as ServerFailure, context: context);
             },
             loading: () {});
       },
@@ -74,17 +77,24 @@ class _SignpuPageState extends ConsumerState<SignupPage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      CustomFiled(hintText: 'Name', isObscured: false, controller: _nameController),
+                      CustomField(
+                          hintText: 'Name',
+                          isObscured: false,
+                          controller: _nameController),
                       const SizedBox(
                         height: 10,
                       ),
-                      CustomFiled(
-                          hintText: 'Email', isObscured: false, controller: _emailController),
+                      CustomField(
+                          hintText: 'Email',
+                          isObscured: false,
+                          controller: _emailController),
                       const SizedBox(
                         height: 10,
                       ),
-                      CustomFiled(
-                          hintText: 'Password', isObscured: true, controller: _passwordController),
+                      CustomField(
+                          hintText: 'Password',
+                          isObscured: true,
+                          controller: _passwordController),
                       const SizedBox(
                         height: 10,
                       ),
@@ -105,16 +115,19 @@ class _SignpuPageState extends ConsumerState<SignupPage> {
                         child: TextButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              ref.read(authViewModelProvider.notifier).signupUser(
-                                  email: _emailController.text,
-                                  name: _nameController.text,
-                                  password: _passwordController.text);
+                              ref
+                                  .read(authViewModelProvider.notifier)
+                                  .signupUser(
+                                      email: _emailController.text,
+                                      name: _nameController.text,
+                                      password: _passwordController.text);
                             }
                           },
                           style: TextButton.styleFrom(
                             backgroundColor: Pallete.transparentColor,
                             foregroundColor: Pallete.whiteColor,
-                            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 14),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 50, vertical: 14),
                             textStyle: const TextStyle(
                               fontSize: 22,
                             ),
@@ -130,12 +143,16 @@ class _SignpuPageState extends ConsumerState<SignupPage> {
                       GestureDetector(
                         onTap: () => context.push('/login'),
                         child: RichText(
-                            text: const TextSpan(text: 'Already have an account ? ', children: [
-                          TextSpan(
-                            text: 'Log In.',
-                            style: TextStyle(fontWeight: FontWeight.bold, color: Pallete.gradient2),
-                          )
-                        ])),
+                            text: const TextSpan(
+                                text: 'Already have an account ? ',
+                                children: [
+                              TextSpan(
+                                text: 'Log In.',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Pallete.gradient2),
+                              )
+                            ])),
                       ),
                     ],
                   ),

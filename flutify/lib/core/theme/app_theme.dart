@@ -12,7 +12,9 @@ class AppTheme {
   static ThemeData darkAppTheme = ThemeData(
     scaffoldBackgroundColor: Pallete.backgroundColor,
     appBarTheme: const AppBarTheme(
+      foregroundColor: Pallete.whiteColor,
       backgroundColor: Pallete.backgroundColor,
+      titleTextStyle: TextStyle(color: Pallete.whiteColor, fontSize: 20),
       elevation: 0,
     ),
     inputDecorationTheme: InputDecorationTheme(

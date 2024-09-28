@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class CustomFiled extends StatelessWidget {
+class CustomField extends StatelessWidget {
   final String hintText;
   final bool isObscured;
   final TextEditingController controller;
 
-  const CustomFiled(
+  const CustomField(
       {super.key,
       required this.hintText,
       required this.isObscured,

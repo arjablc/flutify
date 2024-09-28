@@ -3,6 +3,7 @@ import 'package:flutify/core/service/auth_state_service.dart';
 import 'package:flutify/features/auth/view/pages/about_me_page.dart';
 import 'package:flutify/features/auth/view/pages/login_page.dart';
 import 'package:flutify/features/home/view/pages/home_page.dart';
+import 'package:flutify/features/home/view/pages/upload_song_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -16,21 +17,22 @@ GoRouter router(RouterRef ref) {
   final currentUser = ref.watch(authStateServiceProvider);
   GoRouter router = GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: '/signup',
+    initialLocation: '/home/upload-song',
     errorBuilder: (context, state) => const ErrorPage(),
     redirect: (context, state) {
-      if (currentUser == null) {
-        if (!AuthRoutes.unAuthorized.allowed.contains(state.fullPath)) {
-          debugPrint('from unauthorized redirect');
-          return AuthRoutes.unAuthorized.redirect;
-        }
-      } else {
-        if (!AuthRoutes.authrized.allowed.contains(state.fullPath)) {
-          debugPrint('from authorized redirect');
-          return AuthRoutes.authrized.redirect;
-        }
-      }
-      return null;
+      //TODO: uncomment
+      //if (currentUser == null) {
+      //  if (!AuthRoutes.unAuthorized.allowed.contains(state.fullPath)) {
+      //    debugPrint('from unauthorized redirect');
+      //    return AuthRoutes.unAuthorized.redirect;
+      //  }
+      //} else {
+      //  if (!AuthRoutes.authrized.allowed.contains(state.fullPath)) {
+      //    debugPrint('from authorized redirect');
+      //    return AuthRoutes.authrized.redirect;
+      //  }
+      //}
+      //return null;
     },
     routes: [
       GoRoute(
@@ -41,12 +43,19 @@ GoRouter router(RouterRef ref) {
         path: '/login',
         builder: (context, state) => const LoginPage(),
       ),
-      GoRoute(path: '/home', builder: (context, state) => const HomePage(), routes: [
-        GoRoute(
-          path: 'about-me',
-          builder: (context, state) => const AboutMePage(),
-        )
-      ])
+      GoRoute(
+          path: '/home',
+          builder: (context, state) => const HomePage(),
+          routes: [
+            GoRoute(
+              path: 'about-me',
+              builder: (context, state) => const AboutMePage(),
+            ),
+            GoRoute(
+              path: 'upload-song',
+              builder: (context, state) => const UploadSongPage(),
+            )
+          ])
     ],
   );
   return router;
