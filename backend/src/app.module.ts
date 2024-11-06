@@ -8,9 +8,10 @@ import { PrismaFilter } from './common/filters/prismafilter/prisma.filter';
 import { ZodFilter } from './common/filters/zodfilter/zod.filter';
 import { AuthModule } from './features/auth/auth.module';
 import { HomeModule } from './home/home.module';
+import { SongModule } from './features/song/song.module';
 
 @Module({
-  imports: [UserModule, PrismaModule, AuthModule, HomeModule],
+  imports: [UserModule, PrismaModule, AuthModule, HomeModule, SongModule],
   controllers: [AppController],
   providers: [
     AppService,
@@ -24,4 +25,4 @@ import { HomeModule } from './home/home.module';
     },
   ],
 })
-export class AppModule {}
+export class AppModule { }

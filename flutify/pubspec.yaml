@@ -24,6 +24,7 @@ dependencies:
   flutter_native_splash: ^2.4.1
   flex_color_picker: ^3.5.1
   file_picker: ^8.1.2
+  audio_waveforms: ^1.1.1
 
 dev_dependencies:
   build_runner: ^2.4.12
@@ -57,6 +58,6 @@ flutter_native_splash:
   branding: assets/logo/splash.png
   android_12:
     icon_background_color: "#181825"
-    image: assets/logo/splash_logo.png
+    image: assets/logo/splash.png
 
 

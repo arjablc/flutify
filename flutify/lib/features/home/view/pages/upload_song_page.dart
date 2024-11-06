@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/theme/app_pallete.dart';
 import '../../../../core/widgets/custom_field.dart';
+import '../widgets/audio_waveform.dart';
 
 class UploadSongPage extends ConsumerStatefulWidget {
   const UploadSongPage({super.key});
@@ -89,21 +90,22 @@ class _UploadSongPageState extends ConsumerState<UploadSongPage> {
                 isObscured: false,
                 controller: _songNameController),
             const SizedBox(height: 10),
-            TextButton(
-              style: TextButton.styleFrom(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5, horizontal: 50),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                side: const BorderSide(color: Pallete.gradient1, width: 2),
-              ),
-              onPressed: selectAudio,
-              child: Text('Choose Song',
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge!
-                      .copyWith(fontSize: 20, fontWeight: FontWeight.normal)),
-            ),
+            selectedAudio != null
+                ? AudioWaveForm(path: selectedAudio!.path)
+                : TextButton(
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 50),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      side:
+                          const BorderSide(color: Pallete.gradient1, width: 2),
+                    ),
+                    onPressed: selectAudio,
+                    child: Text('Choose Song',
+                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                            fontSize: 20, fontWeight: FontWeight.normal)),
+                  ),
             ColorPicker(
               pickersEnabled: const {
                 ColorPickerType.wheel: true,
